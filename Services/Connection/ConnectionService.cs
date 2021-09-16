@@ -5,11 +5,11 @@ using System.Data.SqlClient;
 
 namespace NetCoreReactJS.Services.Connection
 {
-    public class ConnectionFactory : IConnectionFactory
+    public class ConnectionService : IConnectionService
     {
         private IDbConnection _connection;
         private readonly IOptions<DBConfiguration> _config;
-        public ConnectionFactory(IOptions<DBConfiguration> configs)
+        public ConnectionService(IOptions<DBConfiguration> configs)
         {
             _config = configs;
         }

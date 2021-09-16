@@ -28,9 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Command\ClientUser\" />
     <Folder Include="Command\Vote\" />
-    <Folder Include="Query\ClientUser\" />
     <Folder Include="Query\Vote\" />
   </ItemGroup>
 

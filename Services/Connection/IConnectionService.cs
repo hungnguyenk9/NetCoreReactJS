@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NetCoreReactJS.Services.Connection
 {
-    public interface IConnectionFactory
+    public interface IConnectionService
     {
         IDbConnection GetConnection();
         void CloseConnection();

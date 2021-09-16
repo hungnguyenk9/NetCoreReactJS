@@ -8,7 +8,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using NetCoreReactJS.Command.ClientUserCmd;
 using NetCoreReactJS.Common;
+using NetCoreReactJS.Query.ClientUserQuery;
 using NetCoreReactJS.Services.Connection;
 using System;
 using System.Text;
@@ -67,7 +69,9 @@ namespace NetCoreReactJS
 
             services.Configure<DBConfiguration>(Configuration.GetSection("ConnectionStrings"));
 
-            services.AddScoped<IConnectionFactory, ConnectionFactory>();
+            services.AddScoped<IConnectionService, ConnectionService>();
+            services.AddScoped<IClientUserCmdService, ClientUserCmdService>();
+            services.AddScoped<IClientUserQueryService, ClientUserQueryService>();
 
 
             services.AddAuthentication(x =>
@@ -128,7 +132,7 @@ namespace NetCoreReactJS
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller}/{action=Index}/{id?}");
+                    pattern: "{controller}/{action}/{id?}");
             });
 
             app.UseSpa(spa =>

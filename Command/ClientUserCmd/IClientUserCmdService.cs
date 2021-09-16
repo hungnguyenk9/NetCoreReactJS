@@ -7,11 +7,8 @@ using NetCoreReactJS.Models.ClientUser;
 
 namespace NetCoreReactJS.Command.ClientUserCmd
 {
-    interface ICommandService
+    public interface IClientUserCmdService
     {
-        ClientUser Authenticate(string email, string password);
-        AuthRes GetToken(ClientUser users);
-        ClientUser AddUser(string email, string password);
-        ClientUser GetOneByEmail(string email);
+        int AddUser(string email, string password);
     }
 }
