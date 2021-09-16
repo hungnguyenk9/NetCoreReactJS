@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.Extensions.Options;
+using NetCoreReactJS.Common;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Options;
-//using NPWeb.Models;
 
 namespace NetCoreReactJS.Services.Connection
 {
