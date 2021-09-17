@@ -1,5 +1,4 @@
-﻿using NetCoreReactJS.Models.AuthResponse;
-using NetCoreReactJS.Models.ClientUser;
+﻿using NetCoreReactJS.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

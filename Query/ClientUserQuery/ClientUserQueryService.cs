@@ -1,9 +1,8 @@
 ﻿using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using NetCoreReactJS.Common;
-using NetCoreReactJS.Models.AuthResponse;
-using NetCoreReactJS.Models.ClientUser;
-using NetCoreReactJS.Services.Connection;
+using NetCoreReactJS.Models;
+using NetCoreReactJS.Services;
 using System;
 using System.Collections.Generic;
 using System.Data;

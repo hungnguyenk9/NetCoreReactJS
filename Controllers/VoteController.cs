@@ -1,47 +1,99 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NetCoreReactJS.Command.VoteCmd;
+using NetCoreReactJS.DTO;
+using NetCoreReactJS.Models;
+using NetCoreReactJS.Query.VoteQuery;
+using System;
+using System.Collections.Generic;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace NetCoreReactJS.Controllers
+namespace NetCoreReactJS.Controllers.Vote
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class VoteController : ControllerBase
     {
-        // GET: api/<VoteController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly IMapper _mapper;
+        private readonly IVoteCmdService _voteCmdService;
+        private readonly IVoteQueryService _voteQueryService;
+        public VoteController(IMapper mapper, IVoteCmdService voteCmdService, IVoteQueryService voteQueryService)
         {
-            return new string[] { "value1", "value2" };
+            _mapper = mapper;
+            _voteCmdService = voteCmdService;
+            _voteQueryService = voteQueryService;
+
+        }
+        // GET: api/Vote/GetByDate/date=00001-01-01&pageNum=1&pageSize=2
+        [HttpGet("{date}")]
+        public IActionResult GetByDate(DateTime date, int pageNum = 1, int pageSize = 2)
+        {
+            try
+            {
+
+                List<VoteItem> lst = _voteQueryService.GetListByDate(date, pageNum, pageSize);
+                return Ok(new ReponseModel(1, "Get Success!", lst));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal server error!");
+            }
         }
 
-        // GET api/<VoteController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<VoteController>
+        // POST api/Vote/Submmit
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Submmit(VoteDTO voteDTO)
         {
+            try
+            {
+
+                int count = _voteQueryService.CountVoteItem(voteDTO.ClientId, voteDTO.Email);
+                if (count < 3)
+                {
+                    int kq = _voteCmdService.SubmitVote(voteDTO.ClientId, voteDTO.Email);
+                    if (kq < 1)
+                    {
+                        return Ok(new ReponseModel(0, "Submmit Fail!", null));
+                    }
+                    else
+                    {
+                        return Ok(new ReponseModel(1, "Submmit Success!", count + 1));
+                    }
+                }
+                else
+                {
+                    return Ok(new ReponseModel(0, "You vote over 3 times!", null));
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal server error!");
+            }
         }
 
-        // PUT api/<VoteController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        // POST api/vote/adđ
+        [Authorize]
+        [HttpPost]
+        public IActionResult Add(VoteItemDTO voteItem)
         {
-        }
-
-        // DELETE api/<VoteController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            try
+            {
+                int kq = _voteCmdService.Add(_mapper.Map<VoteItem>(voteItem));
+                if (kq < 1)
+                {
+                    return Ok(new ReponseModel(0, "Insert Fail!", null));
+                }
+                else
+                {
+                    return Ok(new ReponseModel(1, "Insert Success!", voteItem));
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal server error!");
+            }
         }
     }
 }

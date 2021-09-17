@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -9,9 +10,11 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using NetCoreReactJS.Command.ClientUserCmd;
+using NetCoreReactJS.Command.VoteCmd;
+using NetCoreReactJS.Query.VoteQuery;
 using NetCoreReactJS.Common;
 using NetCoreReactJS.Query.ClientUserQuery;
-using NetCoreReactJS.Services.Connection;
+using NetCoreReactJS.Services;
 using System;
 using System.Text;
 
@@ -69,10 +72,19 @@ namespace NetCoreReactJS
 
             services.Configure<DBConfiguration>(Configuration.GetSection("ConnectionStrings"));
 
+            // Auto Mapper Configurations
+            var mapperConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MappingProfile());
+            });
+
+            IMapper mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
             services.AddScoped<IConnectionService, ConnectionService>();
             services.AddScoped<IClientUserCmdService, ClientUserCmdService>();
             services.AddScoped<IClientUserQueryService, ClientUserQueryService>();
-
+            services.AddScoped<IVoteCmdService, VoteCmdService>();
+            services.AddScoped<IVoteQueryService, VoteQueryService>();
 
             services.AddAuthentication(x =>
             {

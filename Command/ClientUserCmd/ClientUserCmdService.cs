@@ -1,5 +1,5 @@
 ﻿using Dapper;
-using NetCoreReactJS.Services.Connection;
+using NetCoreReactJS.Services;
 using System.Data;
 
 namespace NetCoreReactJS.Command.ClientUserCmd
@@ -11,7 +11,7 @@ namespace NetCoreReactJS.Command.ClientUserCmd
         {
             _connection = connection;
         }
-        public int AddUser(string email, string password)
+        public int Add(string email, string password)
         {
             try
             {
