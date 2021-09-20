@@ -27,7 +27,7 @@ namespace NetCoreReactJS.Controllers.Vote
 
         }
         // GET: api/Vote/GetByDate/date=00001-01-01&pageNum=1&pageSize=2
-        [HttpGet("{date}")]
+        [HttpGet("{date}/{pageNum}/{pageSize}")]
         public IActionResult GetByDate(DateTime date, int pageNum = 1, int pageSize = 2)
         {
             try
