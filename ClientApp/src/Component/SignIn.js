@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, Button, Form } from 'react-bootstrap';
-import './Login.css';
+import './css.css';
 
 export default function SignIn(props) {
   let changeMode = props.action;
@@ -21,13 +21,13 @@ export default function SignIn(props) {
     if (data.statusCode === 1) {
       localStorage.setItem("sample-vote", JSON.stringify(data.data));
       alert("Login success!");
+      changeMode("listVote");
     }
     else {
       alert("Wrong password or email!");
     }
   }
   return (
-
     <div className="warp-content">
       <Card>
         <Form onSubmit={onSubmit}>
@@ -48,7 +48,7 @@ export default function SignIn(props) {
               <Button variant="danger" type="Submit">
                 Submit
               </Button>
-              <Button variant="link" type="Button" onClick={changeMode} style={{ color: 'rgb(109 115 119)' }}>Register</Button>
+              <Button variant="link" type="Button" onClick={() => {changeMode('login')} } style={{ color: 'rgb(109 115 119)' }}>Register</Button>
             </div>
           </Card.Footer>
         </Form>

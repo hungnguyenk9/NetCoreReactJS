@@ -1,31 +1,38 @@
 import React from "react";
 import { Card, Button, Form } from 'react-bootstrap';
+import './css.css';
 
-import './Login.css';
 
-
-export default function Register(probs)
+export default function Register(props)
 {
-
+  let changeMode = props.action;
+  let isConfirm = true;
   async function onSubmit(e) {
+    debugger;
     e.preventDefault();
+    if (e.target["formPassword"].value !== e.target["formConfirmPassword"].value) {
+      isConfirm = false;
+      alert(isConfirm);
+      return;
+    }
     let datasent = {
       "email": e.target["formEmail"].value,
       "password": e.target["formPassword"].value
     };
+    
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(datasent)
     };
-    let response = await fetch("https://localhost:44311/api/User/SignIn", requestOptions);
+    let response = await fetch("https://localhost:44311/api/User/Register", requestOptions);
     let data = await response.json();
     if (data.statusCode === 1) {
       localStorage.setItem("sample-vote", JSON.stringify(data.data));
-      alert("Login success!");
+      alert("Register success!");
     }
     else {
-      alert("Wrong password or email!");
+      alert(data.msg);
     }
   }
   return (
@@ -33,7 +40,7 @@ export default function Register(probs)
       <Card>
         <Form onSubmit={onSubmit}>
           <Card.Body style={{ backgroundColor: 'rgb(44 143 218)' }}>
-            <Card.Title>Login</Card.Title>
+            <Card.Title>Register</Card.Title>
 
             <Form.Group className="mb-3" controlId="formEmail">
               <Form.Control type="email" placeholder="Email" required />
@@ -51,7 +58,7 @@ export default function Register(probs)
           <Card.Footer style={{ backgroundColor: 'rgb(99 175 232)' }}>
             <div className="d-flex justify-content-between">
               <Button variant="danger" type="Submit"> Register</Button>
-              <Button variant="link" type="Button" style={{ color: 'rgb(109 115 119)' }}>Signin</Button>
+              <Button variant="link" type="Button" onClick={() => {changeMode('register')} } style={{ color: 'rgb(109 115 119)' }}>Signin</Button>
             </div>
           </Card.Footer>
         </Form>

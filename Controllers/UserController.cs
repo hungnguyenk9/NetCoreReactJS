@@ -29,12 +29,16 @@ namespace NetCoreReactJS.Controllers.User
         {
             try
             {
-
+                ClientUser userExsit = _clientUserQueryService.GetOneByEmail(userDTO.Email);
+                if (userExsit != null)
+                {
+                    return Ok(new ReponseModel(0, "Register fail! Email already exists!", null));
+                }
                 userDTO.Password = HashMD5.GetMd5Hash(userDTO.Password);
                 int userAdd = _clientUserCmdService.Add(userDTO.Email, userDTO.Password);
                 if (userAdd < 1)
                 {
-                    return Ok(new ReponseModel(0, "Register Fail!", null));
+                    return Ok(new ReponseModel(0, "Register fail!", null));
                 }
                 else
                 {

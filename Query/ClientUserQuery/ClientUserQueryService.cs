@@ -62,7 +62,7 @@ namespace NetCoreReactJS.Query.ClientUserQuery
                     ";
                     var param = new DynamicParameters();
                     param.Add("@Email", email, DbType.String);
-                    ClientUser kq = conn.ExecuteScalar<ClientUser>(SqlQuery, param, commandType: CommandType.Text);
+                    ClientUser kq = conn.Query<ClientUser>(SqlQuery, param, commandType: CommandType.Text).FirstOrDefault();
                     return kq;
                 }
             }
