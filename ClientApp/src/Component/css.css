@@ -52,9 +52,12 @@
 }
 .app-bar-icon-heart
 {
+  margin: 0 3px;
+}
+.app-bar-icon-heart-no-fill
+{
   height: 20px;
   width: 20px;
-  margin: 0 3px;
   color: #ffffff;
   cursor: pointer;
 }
@@ -62,7 +65,6 @@
 {
   height: 20px;
   width: 20px;
-  margin: 0 3px;
   color: #e03213;
   cursor: pointer;
 }

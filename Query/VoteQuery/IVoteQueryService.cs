@@ -8,7 +8,7 @@ namespace NetCoreReactJS.Query.VoteQuery
 {
     public interface IVoteQueryService
     {
-        List<VoteItem> GetListByDate(DateTime date, int pageNum, int pageSize);
+        List<VoteItemInPaging> GetListByDate(DateTime date, int pageNum, int pageSize);
         int CountVoteItem(int voteItemId, string email);
     }
 }

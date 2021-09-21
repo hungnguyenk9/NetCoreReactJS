@@ -25,10 +25,10 @@ export default class App extends Component {
   }
   changeMode(e) {
     if (e === "login") {
-      this.setState({ mode: "register" });
-    }
-    else if (this.state.mode === "register") {
       this.setState({ mode: "login" });
+    }
+    else if (e === "register") {
+      this.setState({ mode: "register" });
     }
     else {
       this.setState({ mode: "listVote" });
@@ -37,9 +37,11 @@ export default class App extends Component {
   render() {
 
     if (this.state.mode === "login") {
+      
       return <SignIn action={this.changeMode} />
     }
     else if (this.state.mode === "register") {
+      
       return <Register action={this.changeMode} />
     }
     else {

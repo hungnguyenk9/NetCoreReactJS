@@ -45,7 +45,7 @@ namespace NetCoreReactJS.Query.VoteQuery
             }
         }
 
-        public List<VoteItem> GetListByDate(DateTime date, int pageNum = 1, int pageSize = 2)
+        public List<VoteItemInPaging> GetListByDate(DateTime date, int pageNum = 1, int pageSize = 2)
         {
             try
             {
@@ -57,6 +57,7 @@ namespace NetCoreReactJS.Query.VoteQuery
                     select 
                             Id, [Name], VoteContent, Sdate, Edate, CreateTime, 
                             (select count(*) from VOTE v where v.VoteItemId = VOTE_ITEM.Id) TotalVote
+                            ,COUNT(*) OVER() TotalRow
                     from VOTE_ITEM
                     where Sdate <= @Date and Edate >= @Date
                     order by CreateTime asc
@@ -67,7 +68,7 @@ namespace NetCoreReactJS.Query.VoteQuery
                     param.Add("@Date", date.ToString("yyyy-MM-dd"), DbType.Date);
                     param.Add("@Skip", skip, DbType.Int32);
                     param.Add("@Take", take, DbType.Int32);
-                    List<VoteItem> kq = conn.Query<VoteItem>(SqlQuery, param, commandType: CommandType.Text).ToList();
+                    List<VoteItemInPaging> kq = conn.Query<VoteItemInPaging>(SqlQuery, param, commandType: CommandType.Text).ToList();
                     return kq;
                 }
             }

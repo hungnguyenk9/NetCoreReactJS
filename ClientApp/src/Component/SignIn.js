@@ -48,7 +48,7 @@ export default function SignIn(props) {
               <Button variant="danger" type="Submit">
                 Submit
               </Button>
-              <Button variant="link" type="Button" onClick={() => {changeMode('login')} } style={{ color: 'rgb(109 115 119)' }}>Register</Button>
+              <Button variant="link" type="Button" onClick={() => {changeMode('register')} } style={{ color: 'rgb(109 115 119)' }}>Register</Button>
             </div>
           </Card.Footer>
         </Form>

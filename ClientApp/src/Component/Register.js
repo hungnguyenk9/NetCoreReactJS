@@ -3,12 +3,10 @@ import { Card, Button, Form } from 'react-bootstrap';
 import './css.css';
 
 
-export default function Register(props)
-{
+export default function Register(props) {
   let changeMode = props.action;
   let isConfirm = true;
   async function onSubmit(e) {
-    debugger;
     e.preventDefault();
     if (e.target["formPassword"].value !== e.target["formConfirmPassword"].value) {
       isConfirm = false;
@@ -19,7 +17,7 @@ export default function Register(props)
       "email": e.target["formEmail"].value,
       "password": e.target["formPassword"].value
     };
-    
+
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -30,6 +28,7 @@ export default function Register(props)
     if (data.statusCode === 1) {
       localStorage.setItem("sample-vote", JSON.stringify(data.data));
       alert("Register success!");
+      changeMode("listVote");
     }
     else {
       alert(data.msg);
@@ -58,7 +57,7 @@ export default function Register(props)
           <Card.Footer style={{ backgroundColor: 'rgb(99 175 232)' }}>
             <div className="d-flex justify-content-between">
               <Button variant="danger" type="Submit"> Register</Button>
-              <Button variant="link" type="Button" onClick={() => {changeMode('register')} } style={{ color: 'rgb(109 115 119)' }}>Signin</Button>
+              <Button variant="link" type="Button" onClick={() => { changeMode('login') }} style={{ color: 'rgb(109 115 119)' }}>Signin</Button>
             </div>
           </Card.Footer>
         </Form>

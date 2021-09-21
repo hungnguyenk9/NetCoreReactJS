@@ -33,7 +33,7 @@ namespace NetCoreReactJS.Controllers.Vote
             try
             {
 
-                List<VoteItem> lst = _voteQueryService.GetListByDate(date, pageNum, pageSize);
+                List<VoteItemInPaging> lst = _voteQueryService.GetListByDate(date, pageNum, pageSize);
                 return Ok(new ReponseModel(1, "Get Success!", lst));
             }
             catch (Exception ex)
@@ -48,18 +48,17 @@ namespace NetCoreReactJS.Controllers.Vote
         {
             try
             {
-
                 int count = _voteQueryService.CountVoteItem(voteDTO.ClientId, voteDTO.Email);
                 if (count < 3)
                 {
                     int kq = _voteCmdService.SubmitVote(voteDTO.ClientId, voteDTO.Email);
                     if (kq < 1)
                     {
-                        return Ok(new ReponseModel(0, "Submmit Fail!", null));
+                        return Ok(new ReponseModel(0, "Vote Fail!", null));
                     }
                     else
                     {
-                        return Ok(new ReponseModel(1, "Submmit Success!", count + 1));
+                        return Ok(new ReponseModel(1, "Vote Success!", count + 1));
                     }
                 }
                 else
