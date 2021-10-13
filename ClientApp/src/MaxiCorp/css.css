@@ -1,0 +1,81 @@
+.header {
+  text-align: center;
+}
+.warp-content
+{
+  position: relative;
+  margin: 30px auto;
+  width: 500px;
+}
+.border-shadow
+{
+  border: 1px solid #b1b1b1;
+}
+.app-bar
+{
+  height: 50px;
+  background-color: #2c8fda;
+  vertical-align: middle;
+  color: #ececec;
+}
+.app-bar-icon
+{
+  height: 30px;
+  width: 30px;
+  margin: auto 15px;
+  color: #ececec;
+}
+.date-text
+{
+  margin-left: 5px;
+  margin-right: 5px;
+  font-size: 14px;
+}
+.app-bar-icon-down
+{
+  height: 12px;
+  width: 12px;
+  margin: 0 5px;
+  color: #ececec;
+}
+.app-bar-icon-persom
+{
+  height: 30px;
+  width: 30px;
+  margin: 0 17px;
+}
+.item-vote-name
+{
+  font-weight: bold;
+  font-size: 16px;
+  margin-left: 10px;
+}
+.app-bar-icon-heart
+{
+  height: 20px;
+  width: 20px;
+  margin: 0 3px;
+  color: #ffffff;
+  cursor: pointer;
+}
+.app-bar-icon-heart-fill
+{
+  height: 20px;
+  width: 20px;
+  margin: 0 3px;
+  color: #e03213;
+  cursor: pointer;
+}
+.item-vote-count
+{
+  color: #e03213;
+  font-size: 18px;
+  font-weight: bold;
+  font-style: italic;
+}
+.vote-content
+{
+  width: 100%;
+  color: white;
+  font-size: 17px;
+}
