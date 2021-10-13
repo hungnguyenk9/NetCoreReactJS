@@ -50,7 +50,7 @@
   font-size: 16px;
   margin-left: 10px;
 }
-.app-bar-icon-heart
+.app-bar-icon
 {
   height: 20px;
   width: 20px;
@@ -58,12 +58,12 @@
   color: #ffffff;
   cursor: pointer;
 }
-.app-bar-icon-heart-fill
+.app-bar-icon-edit-fill
 {
   height: 20px;
   width: 20px;
   margin: 0 3px;
-  color: #e03213;
+  color: #4e4a49;
   cursor: pointer;
 }
 .item-vote-count

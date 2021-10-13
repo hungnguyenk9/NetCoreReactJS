@@ -26,14 +26,17 @@ namespace NetCoreReactJS.Query.StaffQuery
                     string SqlQuery = @"
                         select s.*, s1.StfName as ManName, d.DeptName, p.PosName
                         from 
-	                        staff s left join staff s1 on s.ManId = s.Id
+	                        staff s left join staff s1 on s.ManId = s1.Id
 	                        left join Dept d on s.DeptId = d.id
 	                        left join Pos p on s.PosId = p.id
-                        where 
-	                       s.StfName like CONCAT('%',@Name,'%')
+                        where s.IsDel <> 1
                     ";// 
                     var param = new DynamicParameters();
-                    param.Add("@Name", Name, DbType.String);
+                    if (Name != null)
+                    {
+                        SqlQuery += @" and s.StfName like CONCAT('%', @Name, '%')";
+                        param.Add("@Name", Name, DbType.String);
+                    }
                     List<StaffDTO> kq = conn.Query<StaffDTO>(SqlQuery, param, commandType: CommandType.Text).ToList();
                     return kq;
                 }

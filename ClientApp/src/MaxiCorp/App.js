@@ -14,10 +14,10 @@ export default function App() {
         <div style={{width:"500px", margin: "0 auto",}}>
             <Nav activeKey="/">
                 <Nav.Item>
-                    <Nav.Link href="/">List Staff</Nav.Link>
+                    <Nav.Link href="/">Danh sách</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link href="/add">Add Staff</Nav.Link>
+                    <Nav.Link href="/add">Thêm mới</Nav.Link>
                 </Nav.Item>
             </Nav>
             <Switch>

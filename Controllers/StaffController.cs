@@ -42,6 +42,7 @@ namespace NetCoreReactJS.Controllers.Staff
             }
             catch (Exception ex)
             {
+                Console.Write(ex);
                 return StatusCode(500,"Internal server error!");
             }
         }
@@ -64,6 +65,7 @@ namespace NetCoreReactJS.Controllers.Staff
             }
             catch (Exception ex)
             {
+                Console.Write(ex);
                 return StatusCode(500, "Internal server error!");
             }
         }
@@ -87,12 +89,13 @@ namespace NetCoreReactJS.Controllers.Staff
             }
             catch (Exception ex)
             {
+                Console.Write(ex);
                 return StatusCode(500, "Internal server error!");
             }
         }
         // api/Staff/GetByName/Name
-        [HttpGet("{Name}")]
-        public IActionResult GetByName(string Name)
+        [HttpGet("{Name?}")]
+        public IActionResult GetByName(string? Name)
         {
             try
             {
@@ -102,6 +105,7 @@ namespace NetCoreReactJS.Controllers.Staff
             }
             catch (Exception ex)
             {
+                Console.Write(ex);
                 return StatusCode(500, "Internal server error!");
             }
         }
@@ -116,6 +120,7 @@ namespace NetCoreReactJS.Controllers.Staff
             }
             catch (Exception ex)
             {
+                Console.Write(ex);
                 return StatusCode(500, "Internal server error!");
             }
         }

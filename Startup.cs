@@ -17,6 +17,9 @@ using NetCoreReactJS.Query.ClientUserQuery;
 using NetCoreReactJS.Services;
 using System;
 using System.Text;
+using NetCoreReactJS.Command.StaffCmd;
+using NetCoreReactJS.Query.StaffQuery;
+using NetCoreReactJS.Command.DeptCmd;
 
 namespace NetCoreReactJS
 {
@@ -85,6 +88,9 @@ namespace NetCoreReactJS
             services.AddScoped<IClientUserQueryService, ClientUserQueryService>();
             services.AddScoped<IVoteCmdService, VoteCmdService>();
             services.AddScoped<IVoteQueryService, VoteQueryService>();
+            services.AddScoped<IStaffCmdService, StaffCmdService>();
+            services.AddScoped<IStaffQueryService, StaffQueryService>();
+            services.AddScoped<IDeptCmdService, DeptCmdService>();
 
             services.AddAuthentication(x =>
             {
@@ -149,15 +155,15 @@ namespace NetCoreReactJS
                     pattern: "{controller}/{action}/{id?}");
             });
 
-            app.UseSpa(spa =>
-            {
-                spa.Options.SourcePath = "ClientApp";
+            //app.UseSpa(spa =>
+            //{
+            //    spa.Options.SourcePath = "ClientApp";
 
-                if (env.IsDevelopment())
-                {
-                    spa.UseReactDevelopmentServer(npmScript: "start");
-                }
-            });
+            //    if (env.IsDevelopment())
+            //    {
+            //        spa.UseReactDevelopmentServer(npmScript: "start");
+            //    }
+            //});
         }
     }
 }

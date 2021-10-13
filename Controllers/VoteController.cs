@@ -38,6 +38,7 @@ namespace NetCoreReactJS.Controllers.Vote
             }
             catch (Exception ex)
             {
+                Console.Write(ex);
                 return StatusCode(500, "Internal server error!");
             }
         }
@@ -68,6 +69,7 @@ namespace NetCoreReactJS.Controllers.Vote
             }
             catch (Exception ex)
             {
+                Console.Write(ex);
                 return StatusCode(500, "Internal server error!");
             }
         }
@@ -91,6 +93,7 @@ namespace NetCoreReactJS.Controllers.Vote
             }
             catch (Exception ex)
             {
+                Console.Write(ex);
                 return StatusCode(500, "Internal server error!");
             }
         }
