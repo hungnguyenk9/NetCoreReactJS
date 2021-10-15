@@ -7,11 +7,11 @@ export default function Edit({ history, match }) {
   const { id } = match.params;
   let [listStaff, setlistStaff] = useState([]);
   let stf = {
-    id: "",
-    stfName: "",
-    deptId: 0,
-    posId: 0,
-    manId: 0
+    "id": "",
+    "stfName": "",
+    "deptId": 0,
+    "posId": 0,
+    "manId": 0
   };
   let [staff, setstaff] = useState(stf);
   useEffect(() => {
@@ -31,8 +31,7 @@ export default function Edit({ history, match }) {
           if (data.statusCode === 1) {
             alert(data.msg);
           }
-          else
-          {
+          else {
             alert(data.msg);
           }
         })
@@ -71,11 +70,11 @@ export default function Edit({ history, match }) {
         let data = response.data;
         if (data.statusCode === 1) {
           let st = {
-            id: data.data.id,
-            stfName: data.data.stfName,
-            deptId: data.data.deptId,
-            posId: data.data.posId,
-            manId: data.data.manId
+            "id": data.data.id,
+            "stfName": data.data.stfName,
+            "deptId": data.data.deptId,
+            "posId": data.data.posId,
+            "manId": data.data.manId
           };
           setstaff(st);
         }
@@ -89,7 +88,7 @@ export default function Edit({ history, match }) {
   }
   const handleChange = (event) => {
     let { name, value } = event.target
-    setstaff({ ...staff, [name]: value });
+    setstaff({ ...staff, [name]: (event.target.type === "text" ? value : parseInt(value)) });
   }
   return (
     <div className="warp-content">
@@ -105,7 +104,7 @@ export default function Edit({ history, match }) {
             <Form.Group className="mb-3" controlId="DeptId">
               <Form.Label>Phòng ban</Form.Label>
               <Form.Control as="select" value={staff.deptId} name="deptId" onChange={handleChange}>
-                <option value={null}>----</option>
+                <option value="0">----</option>
                 <option value="1">Phòng IT</option>
                 <option value="2">Phòng Kế Toán</option>
               </Form.Control>
@@ -113,7 +112,7 @@ export default function Edit({ history, match }) {
             <Form.Group className="mb-3" controlId="PosId">
               <Form.Label>Chức vụ</Form.Label>
               <Form.Control as="select" value={staff.posId} name="posId" onChange={handleChange}>
-                <option value={null}>----</option>
+                <option value="0">----</option>
                 <option value="4">Nhân Viên</option>
                 <option value="3">Trưởng Nhóm</option>
                 <option value="2">Quản Lý</option>
@@ -123,7 +122,7 @@ export default function Edit({ history, match }) {
             <Form.Group className="mb-3" controlId="ManId">
               <Form.Label>Quản lý trực tiếp</Form.Label>
               <Form.Control as="select" value={staff.manId} name="manId" onChange={handleChange}>
-                <option value={null}>----</option>
+                <option value="0">----</option>
                 {listStaff.map(item => (
                   <option value={item.id} key={item.id}>{item.stfName}</option>
                 ))}

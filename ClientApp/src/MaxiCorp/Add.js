@@ -17,16 +17,10 @@ export default function Add() {
   }, []);
   function onSubmit(e) {
     e.preventDefault();
-    let datasent = {
-      "stfName": e.target["StfName"].value,
-      "deptId": parseInt(e.target["DeptId"].value),
-      "posId": parseInt(e.target["PosId"].value),
-      "manId": parseInt(e.target["ManId"].value),
-    };
     const headers = {
       "content-type": "application/json"
     };
-    axios.post("https://localhost:44311/api/Staff/Add", datasent, { headers })
+    axios.post("https://localhost:44311/api/Staff/Add", staff, { headers })
       .then(
         (response) => {
           let data = response.data;
@@ -65,7 +59,7 @@ export default function Add() {
   }
   const handleChange = (event) => {
     let { name, value } = event.target
-    setstaff({ ...staff, [name]: value });
+    setstaff({ ...staff, [name]: (event.target.type === "text" ? value : parseInt(value)) });
   }
   return (
     <div className="warp-content">
@@ -81,7 +75,7 @@ export default function Add() {
             <Form.Group className="mb-3" controlId="DeptId">
               <Form.Label>Phòng ban</Form.Label>
               <Form.Control as="select" value={staff.deptId} name="deptId" onChange={handleChange}>
-                <option value={null}>----</option>
+                <option value="0">----</option>
                 <option value="1">Phòng IT</option>
                 <option value="2">Phòng Kế Toán</option>
               </Form.Control>
@@ -89,7 +83,7 @@ export default function Add() {
             <Form.Group className="mb-3" controlId="PosId">
               <Form.Label>Chức vụ</Form.Label>
               <Form.Control as="select" value={staff.posId} name="posId" onChange={handleChange}>
-                <option value={null}>----</option>
+                <option value="0">----</option>
                 <option value="4">Nhân Viên</option>
                 <option value="3">Trưởng Nhóm</option>
                 <option value="2">Quản Lý</option>
@@ -99,7 +93,7 @@ export default function Add() {
             <Form.Group className="mb-3" controlId="ManId">
               <Form.Label>Quản lý trực tiếp</Form.Label>
               <Form.Control as="select" value={staff.manId} name="manId" onChange={handleChange}>
-                <option value={null}>----</option>
+                <option value="0">----</option>
                 {listStaff.map(item => (
                   <option value={item.id} key={item.id}>{item.stfName}</option>
                 ))}
