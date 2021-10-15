@@ -70,7 +70,14 @@ export default function Edit({ history, match }) {
       .then((response) => {
         let data = response.data;
         if (data.statusCode === 1) {
-          setstaff(data.data);
+          let st = {
+            id: data.data.id,
+            stfName: data.data.stfName,
+            deptId: data.data.deptId,
+            posId: data.data.posId,
+            manId: data.data.manId
+          };
+          setstaff(st);
         }
         else {
           alert(data.msg);
