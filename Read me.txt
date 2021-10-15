@@ -1,0 +1,29 @@
+====================
+hướng dẫn sử dụng
+====================
+Cách 1:
+1. open file solution bằng visual studio 2019
+2. để f5 để start api
+3. start web client
+	2.1 mở thư mục ClientApp bằng VS Code
+	2.2 run command : npm i 
+	2.3 run command : npm start
+Cách 2:
+1. open file solution bằng visual studio 2019
+2. vào file statup.cs mở comment đoạn code
+	    
+	    app.UseSpa(spa =>
+            {
+                spa.Options.SourcePath = "ClientApp";
+
+                if (env.IsDevelopment())
+                {
+                    spa.UseReactDevelopmentServer(npmScript: "start");
+                }
+            });
+3. f5 start project
+** khi api start vào "https://localhost:xxxx/swagger" để vào trang api document
+** Database đang host trên azure 
+** nếu muốn sử dụng Database local:
+	- restore file "hungnt.bak" trong thư mục DB
+	- chỉnh lại "ConnectionStrings" trong file appsettings.json
