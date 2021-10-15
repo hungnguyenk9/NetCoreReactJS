@@ -71,7 +71,7 @@ namespace NetCoreReactJS.Controllers.Staff
         }
 
         //api/Staff/Delete
-        [HttpDelete]
+        [HttpDelete("{stfId}")]
         public IActionResult Delete(int stfId)
         {
             try
@@ -95,7 +95,7 @@ namespace NetCoreReactJS.Controllers.Staff
         }
         // api/Staff/GetByName/Name
         [HttpGet("{Name?}")]
-        public IActionResult GetByName(string? Name)
+        public IActionResult GetByName(string Name)
         {
             try
             {
@@ -117,6 +117,22 @@ namespace NetCoreReactJS.Controllers.Staff
             {
                 var lst = _staffQueryService.GetListMan(Id);
                 return Ok(new ReponseModel(1, "Get Success!", lst));
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex);
+                return StatusCode(500, "Internal server error!");
+            }
+        }
+
+        // api/Staff/GetById/id
+        [HttpGet("{Id}")]
+        public IActionResult GetById(int Id = 0)
+        {
+            try
+            {
+                var rs = _staffQueryService.GetOneById(Id);
+                return Ok(new ReponseModel(1, "Get Success!", rs));
             }
             catch (Exception ex)
             {

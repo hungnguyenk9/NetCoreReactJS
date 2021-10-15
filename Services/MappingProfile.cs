@@ -16,6 +16,7 @@ namespace NetCoreReactJS.Services
             CreateMap<VoteItem, VoteItemDTO> ();
             CreateMap<Staff, StaffAddDTO>();
             CreateMap<StaffAddDTO, Staff>();
+            CreateMap<StaffUpdateDTO, Staff>();
         }
     }
 }

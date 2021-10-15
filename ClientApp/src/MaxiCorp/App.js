@@ -5,6 +5,7 @@ import {
   Route
 } from "react-router-dom";
 import Add from "./Add";
+import Edit from "./Edit";
 import Nav from 'react-bootstrap/Nav';
 import List from "./List";
 
@@ -17,12 +18,13 @@ export default function App() {
                     <Nav.Link href="/">Danh sách</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link href="/add">Thêm mới</Nav.Link>
+                    <Nav.Link href="/Add">Thêm mới</Nav.Link>
                 </Nav.Item>
             </Nav>
             <Switch>
                 <Route component={List} path="/" exact={true} />
-                <Route component={Add} path="/add" />
+                <Route component={Add} path="/Add" />
+                <Route component={Edit} path="/Edit/:id" />
             </Switch>
       </div>
     </Router>

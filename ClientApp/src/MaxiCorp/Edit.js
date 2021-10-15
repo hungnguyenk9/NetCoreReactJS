@@ -3,9 +3,11 @@ import { Card, Button, Form } from 'react-bootstrap';
 import './css.css';
 import axios from 'axios';
 
-export default function Add() {
+export default function Edit({ history, match }) {
+  const { id } = match.params;
   let [listStaff, setlistStaff] = useState([]);
   let stf = {
+    id: "",
     stfName: "",
     deptId: 0,
     posId: 0,
@@ -13,28 +15,24 @@ export default function Add() {
   };
   let [staff, setstaff] = useState(stf);
   useEffect(() => {
-    getListMan();
-  }, []);
+    getById(id);
+    getListMan(id);
+
+  }, [id]);
   function onSubmit(e) {
     e.preventDefault();
-    let datasent = {
-      "stfName": e.target["StfName"].value,
-      "deptId": parseInt(e.target["DeptId"].value),
-      "posId": parseInt(e.target["PosId"].value),
-      "manId": parseInt(e.target["ManId"].value),
-    };
     const headers = {
       "content-type": "application/json"
     };
-    axios.post("https://localhost:44311/api/Staff/Add", datasent, { headers })
+    axios.put("https://localhost:44311/api/Staff/Update", staff, { headers })
       .then(
         (response) => {
           let data = response.data;
           if (data.statusCode === 1) {
             alert(data.msg);
-            getListMan();
           }
-          else {
+          else
+          {
             alert(data.msg);
           }
         })
@@ -42,10 +40,10 @@ export default function Add() {
         console.log(error)
       });
   }
-  const getListMan = () => {
+  const getListMan = (id = 0) => {
     axios({
       "method": "GET",
-      "url": "https://localhost:44311/api/Staff/GetListMan/0",
+      "url": "https://localhost:44311/api/Staff/GetListMan/" + id,
       "headers": {
         "content-type": "application/json"
       }
@@ -55,12 +53,31 @@ export default function Add() {
         if (data.statusCode === 1) {
           setlistStaff(data.data);
         }
-        else {
-          setlistStaff([]);
-        }
+
       })
       .catch((error) => {
         console.log(error)
+      })
+  }
+  const getById = (id) => {
+    axios({
+      "method": "GET",
+      "url": "https://localhost:44311/api/Staff/GetById/" + id,
+      "headers": {
+        "content-type": "application/json"
+      }
+    })
+      .then((response) => {
+        let data = response.data;
+        if (data.statusCode === 1) {
+          setstaff(data.data);
+        }
+        else {
+          alert(data.msg);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
       })
   }
   const handleChange = (event) => {
@@ -72,7 +89,7 @@ export default function Add() {
       <Card>
         <Form onSubmit={onSubmit}>
           <Card.Body style={{ backgroundColor: "rgb(44 143 218)" }}>
-            <Card.Title style={{ color: "white" }}>Thêm nhân viên</Card.Title>
+            <Card.Title style={{ color: "white" }}>Chỉnh sửa thông tin</Card.Title>
             <Form.Group className="mb-3" controlId="StfName">
               <Form.Label>Tên nhân viên</Form.Label>
               <Form.Control type="text" placeholder="Staff Name" name="stfName" value={staff.stfName} required onChange={handleChange} />
@@ -110,7 +127,7 @@ export default function Add() {
           <Card.Footer style={{ backgroundColor: "rgb(99 175 232)" }}>
             <div className="d-flex justify-content-between">
               <Button variant="danger" type="Submit">
-                Thêm mới
+                Cập nhật
               </Button>
             </div>
           </Card.Footer>

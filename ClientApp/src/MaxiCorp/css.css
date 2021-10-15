@@ -79,3 +79,8 @@
   color: white;
   font-size: 17px;
 }
+.warp-content-list
+{
+  max-height: 700px;
+  overflow: auto;
+}

@@ -60,6 +60,7 @@ namespace NetCoreReactJS.Query.StaffQuery
 	                        left join Dept d on s.DeptId = d.id
 	                        left join Pos p on s.PosId = p.id
                         where 
+                           s.IsDel <> 1 and
 	                       s.StfId <> @Id
                     ";// 
                     var param = new DynamicParameters();
